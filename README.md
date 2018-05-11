@@ -6,6 +6,8 @@ Which do you see, 21 or 74? Be care, the devil is in the details!
 ## Contents
 ---
   * [About](#About)
+  * [Installation](#Installation)
+  * [Disclaimer](#Disclaimer)
 
 ## About
 ---
