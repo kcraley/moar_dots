@@ -1,5 +1,4 @@
 #!/bin/bash
-# Colors to be used for the printers
 
 # Colors
 BLINK="\e[5m"
@@ -19,6 +18,7 @@ COL_LIGHT_BLUE="\e[94m"
 COL_LIGHT_MAGENTA="\e[95m"
 COL_LIGHT_CYAN="\e[96m"
 
+# Printer helpers
 function action() {
   echo -e "$COL_BLUE[action]:$COL_RESET "$1
 }
