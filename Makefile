@@ -1,4 +1,4 @@
-#!/usr/bin/make
+#!/usr/bin/env make
 
 .PHONY: all
 all: install backup
@@ -10,3 +10,7 @@ install:
 .PHONY: backup
 backup:
 	/bin/sh backup.sh
+
+.PHONY: restore
+restore:
+	/bin/sh restore.sh
