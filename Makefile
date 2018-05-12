@@ -5,12 +5,12 @@ all: install backup
 
 .PHONY: install
 install:
-	/bin/sh install.sh
+	/bin/bash install.sh
 
 .PHONY: backup
 backup:
-	/bin/sh backup.sh
+	/bin/bash backup.sh
 
 .PHONY: restore
 restore:
-	/bin/sh restore.sh
+	/bin/bash restore.sh
