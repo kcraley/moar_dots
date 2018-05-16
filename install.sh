@@ -6,9 +6,14 @@ source ./lib/printers.sh
 source ./lib/reqs.sh
 
 # Set global variables
+backupdir=~/.dotfile.backups
 CMD="$1"
 dotfiles=$(pwd)
 program=$(basename "$0")
+
+function install() {
+
+}
 
 #
 case "$CMD" in
