@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # Colors
-BLINK="\e[5m"
 COL_RESET="\e[0m"
 COL_RED="\e[31m"
 COL_GREEN="\e[32m"
@@ -40,13 +39,15 @@ function warn() {
 }
 
 function splash() {
-    echo -e ""
-    echo -e ""
-    echo -e ""
-    echo -e ""
-    echo -e ""
-    echo -e ""
-    echo -e ""
+    echo
+    echo -e "$COL_RED"          ".::       .::                                .:::::                .::           "
+    echo -e "$COL_GREEN"        ".: .::   .:::                                .::   .::             .::           "
+    echo -e "$COL_YELLOW"       ".:: .:: . .::   .::       .::    .: .:::     .::    .::   .::    .:.: .:.:::: .::"
+    echo -e "$COL_BLUE"         ".::  .::  .:: .::  .::  .::  .::  .::        .::    .:: .::  .::   .::       .:: "
+    echo -e "$COL_LIGHT_BLUE"   ".::   .:  .::.::    .::.::   .::  .::        .::    .::.::    .::  .::     .::   "
+    echo -e "$COL_MAGENTA"      ".::       .:: .::  .:: .::   .::  .::        .::   .::  .::  .::   .::    .::    "
+    echo -e "$COL_CYAN"         ".::       .::   .::      .:: .:::.:::        .:::::       .::       .:: .::::::::"
+    echo -e "$COL_RESET"
 }
 
 function printusage() {
