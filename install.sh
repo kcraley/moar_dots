@@ -12,10 +12,16 @@ dotfiles=$(pwd)
 program=$(basename "$0")
 
 function install() {
-
+    action "We are going to install the dotfiles from moar_dotz"
+    prompt "Would you like to continue? [y|n]: " && read response
+    if [[ $response =~ (yes|y|Y) ]]; then
+        action "Let's get started!"
+    else
+        exit 0
+    fi
 }
 
-#
+# Read command line arguements
 case "$CMD" in
     -i|--install)
         # Display splash
