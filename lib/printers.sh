@@ -26,12 +26,16 @@ function error() {
     echo -e "$COL_RED[error]$COL_RESET "$1
 }
 
-function running() {
-    echo -en "$COL_YELLOW ⇒ $COL_RESET: $1 "
-}
-
 function ok() {
     echo -e "$COL_GREEN[ok]$COL_RESET "$1
+}
+
+function prompt() {
+    echo -e "$COL_MAGENTA"
+}
+
+function running() {
+    echo -en "$COL_YELLOW ⇒ $COL_RESET: $1 "
 }
 
 function warn() {
