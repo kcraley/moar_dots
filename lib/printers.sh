@@ -31,7 +31,7 @@ function ok() {
 }
 
 function prompt() {
-    echo -e "$COL_MAGENTA"
+    echo -en "$COL_MAGENTA[prompt]$COL_RESET $1"
 }
 
 function running() {
