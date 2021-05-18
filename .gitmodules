@@ -1,0 +1,24 @@
+[submodule "vim/pack/vim-terraform"]
+	path = vim/pack/vim-terraform
+	url = https://github.com/hashivim/vim-terraform.git
+[submodule "vim/pack/vim-powerline"]
+	path = vim/pack/vim-powerline
+	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "vim/pack/vim-go"]
+	path = vim/pack/vim-go
+	url = https://github.com/fatih/vim-go
+[submodule "vim/pack/syntastic"]
+	path = vim/pack/syntastic
+	url = https://github.com/vim-syntastic/syntastic
+[submodule "vim/pack/nerdtree"]
+	path = vim/pack/nerdtree
+	url = https://github.com/preservim/nerdtree
+[submodule "vim/pack/vim-fugitive"]
+	path = vim/pack/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/pack/delimitMate"]
+	path = vim/pack/delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
+[submodule "vim/pack/ctrlp.vim"]
+	path = vim/pack/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
