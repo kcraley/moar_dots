@@ -8,8 +8,8 @@ export COMMAND=$1
 export BACKUPDIR="~/.dotfiles.bak"
 export LIBRARY_DIR="$(pwd)/lib"
 
-export VIM_AUTOLOAD_DIR=${VIM_AUTOLOAD_DIR:=${HOME}/.vim/autoload}
-export VIM_PACKAGE_DIR=${VIM_PACKAGE_DIR:=${HOME}/vim/pack}
+export VIM_AUTOLOAD_DIR=${VIM_AUTOLOAD_DIR:=~/.vim/autoload}
+export VIM_PACKAGE_DIR=${VIM_PACKAGE_DIR:=~/.vim/pack}
 
 # Include lib helpers
 for FILE in $(find ${LIBRARY_DIR} -type f); do
@@ -33,15 +33,19 @@ function install() {
     git submodule update --init --recursive
     
     # Configure and install all vim plugins
-    if [[ -d ${VIM_AUTOLOAD_DIR} ]]; then
+    if [[ ! -d ${VIM_AUTOLOAD_DIR} ]]; then
 	action "Creating directory: ${VIM_AUTOLOAD_DIR}"
         mkdir -p ${VIM_AUTOLOAD_DIR}
     fi
+    if [[ ! -d ${VIM_PACKAGE_DIR} ]]; then
+        action "Creating directory: ${VIM_PACKAGE_DIR}"
+	mkdir -p ${VIM_PACKAGE_DIR}
+    fi
     
-    for DIR in $(readlink -f $0)/vim/pack/*; do
+    for DIR in $(pwd)/vim/pack/*; do
         if [[ -d ${DIR} ]]; then
             action "Linking vim plugin: $(basename ${DIR})"
-	    ln -s -f "${DIR}" "${VIM_PACKAGE_DIR}/$(basename ${DIR})}"
+	    ln -s -f "${DIR}" "${VIM_PACKAGE_DIR}/$(basename ${DIR})"
 	fi
     done
 
