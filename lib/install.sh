@@ -53,10 +53,10 @@ function install() {
     # Install tfenv
     create_dir ${TFENV_DIR}
     if [[ ! -d ${TFENV_DIR}/.git ]]; then
-	action "Cloning tfenv repository"
-	git clone https://github.com/tfutils.tfenv.git ${TFENV_DIR}
+        action "Cloning tfenv repository"
+        git clone https://github.com/tfutils.tfenv.git ${TFENV_DIR}
     else
-	warn "Skipping Git clone, tfenv may already be installed"
+        warn "Skipping Git clone, tfenv may already be installed"
     fi
 
     # Install fzf
