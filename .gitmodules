@@ -22,3 +22,6 @@
 [submodule "vim/pack/ctrlp.vim"]
 	path = vim/pack/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim/pack/vim-sensible"]
+	path = vim/pack/vim-sensible
+	url = https://github.com/tpope/vim-sensible.git
