@@ -25,3 +25,6 @@
 [submodule "vim/pack/vim-sensible"]
 	path = vim/pack/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
+[submodule "vim/pack/editorconfig"]
+	path = vim/pack/editorconfig
+	url = https://github.com/editorconfig/editorconfig.git
