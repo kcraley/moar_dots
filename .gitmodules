@@ -28,3 +28,6 @@
 [submodule "vim/pack/editorconfig"]
 	path = vim/pack/editorconfig
 	url = https://github.com/editorconfig/editorconfig.git
+[submodule "vim/pack/vim-markdown"]
+	path = vim/pack/vim-markdown
+	url = https://github.com/tpope/vim-markdown.git
