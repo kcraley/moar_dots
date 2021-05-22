@@ -11,7 +11,7 @@ function install() {
     if [[ $response =~ (yes|y|Y) ]]; then
         action "Let's get started!"
     else
-	action "Aborting installation..."
+        action "Aborting installation..."
         exit 0
     fi
 
@@ -25,7 +25,7 @@ function install() {
     create_dir "${HOME_BIN_DIR}"
     create_dir "${HOME_ENV_DIR}"
     if [[ -f "${HOME_ENV_DIR}" ]]; then
-	touch -a "${HOME_ENV_DIR}/secrets"
+        touch -a "${HOME_ENV_DIR}/secrets"
     fi
 
     # Create Vim directories
