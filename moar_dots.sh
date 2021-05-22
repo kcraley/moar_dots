@@ -9,7 +9,7 @@ export BACKUPDIR="~/.dotfiles.bak"
 export LIBRARY_DIR="$(pwd)/lib"
 
 export VIM_AUTOLOAD_DIR=${VIM_AUTOLOAD_DIR:=~/.vim/autoload}
-export VIM_PACKAGE_DIR=${VIM_PACKAGE_DIR:=~/.vim/pack}
+export VIM_BUNDLE_DIR=${VIM_BUNDLE_DIR:=~/.vim/bundle}
 
 # Include lib helpers
 for FILE in $(find ${LIBRARY_DIR} -type f); do
@@ -37,15 +37,18 @@ function install() {
 	action "Creating directory: ${VIM_AUTOLOAD_DIR}"
         mkdir -p ${VIM_AUTOLOAD_DIR}
     fi
-    if [[ ! -d ${VIM_PACKAGE_DIR} ]]; then
-        action "Creating directory: ${VIM_PACKAGE_DIR}"
-	mkdir -p ${VIM_PACKAGE_DIR}
+    if [[ ! -d ${VIM_BUNDLE_DIR} ]]; then
+        action "Creating directory: ${VIM_BUNDLE_DIR}"
+	mkdir -p ${VIM_BUNDLE_DIR}
     fi
-    
+   
+    # Install Vim Pathogen
+    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
     for DIR in $(pwd)/vim/pack/*; do
         if [[ -d ${DIR} ]]; then
             action "Linking vim plugin: $(basename ${DIR})"
-	    ln -s -f "${DIR}" "${VIM_PACKAGE_DIR}/$(basename ${DIR})"
+	    ln -s -f "${DIR}" "${VIM_BUNDLE_DIR}/$(basename ${DIR})"
 	fi
     done
 
