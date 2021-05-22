@@ -21,29 +21,60 @@ function install() {
     action "Initializing Git submodules"
     git submodule update --init --recursive
     
-    # Create necessary Vim directories
-    if [[ ! -d ${VIM_AUTOLOAD_DIR} ]]; then
-	action "Creating directory: ${VIM_AUTOLOAD_DIR}"
-        mkdir -p ${VIM_AUTOLOAD_DIR}
+    # Create custom home directories
+    create_dir "${HOME_BIN_DIR}"
+    create_dir "${HOME_ENV_DIR}"
+    if [[ -f "${HOME_ENV_DIR}" ]]; then
+	touch -a "${HOME_ENV_DIR}/secrets"
     fi
-    if [[ ! -d ${VIM_BUNDLE_DIR} ]]; then
-        action "Creating directory: ${VIM_BUNDLE_DIR}"
-	mkdir -p ${VIM_BUNDLE_DIR}
-    fi
+
+    # Create Vim directories
+    create_dir ${VIM_AUTOLOAD_DIR}
+    create_dir ${VIM_BUNDLE_DIR}
    
     # Install Vim Pathogen
-    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    if [[ ! -f ${VIM_AUTOLOAD_DIR}/pathogen.vim ]]; then
+        action "Downloading and installing Vim Pathogen"
+        curl -LSso "${VIM_AUTOLOAD_DIR}/pathogen.vim" https://tpo.pe/pathogen.vim
+    else
+	warn "Skipping Vim Pathogen installation, already exists: ${VIM_AUTOLOAD_DIR}/pathogen.vim"
+    fi
 
     # Link all Vim Plugins
     for DIR in $(pwd)/vim/pack/*; do
         if [[ -d ${DIR} ]]; then
-            action "Linking vim plugin: $(basename ${DIR})"
-	    ln -s -f "${DIR}" "${VIM_BUNDLE_DIR}/$(basename ${DIR})"
+	    link "${DIR}" "${VIM_BUNDLE_DIR}/$(basename ${DIR})"
 	fi
     done
 
     # Install Vim configuration
-    action "Installing custom ~/.vimrc"
-    ln -s -f "$(pwd)/vim/.vimrc" "${HOME}/.vimrc"
+    link "$(pwd)/vim/.vimrc" "${HOME}/.vimrc"
+
+    # Install tfenv
+    create_dir ${TFENV_DIR}
+    if [[ ! -d ${TFENV_DIR}/.git ]]; then
+	action "Cloning tfenv repository"
+	git clone https://github.com/tfutils.tfenv.git ${TFENV_DIR}
+    else
+	warn "Skipping Git clone, tfenv may already be installed"
+    fi
+
+    # Install fzf
+    create_dir ${FZF_DIR}
+    if [[ ! -d ${FZF_DIR}/.git ]];then
+	action "Cloning fzf repository"
+	git clone https://github.com/junegunn/fzf.git ${FZF_DIR}
+    else
+	warn "Skipping Git clone, fzf may already be installed"
+    fi
+    if [[ -f ${FZF_DIR}/install ]]; then
+	action "Installing fzf"
+	${FZF_DIR}/install --all
+    fi
+
+    # Install custom rc files
+    link "$(pwd)/.ackrc" "${HOME}/.ackrc"
+    link "$(pwd)/.aliasrc" "${HOME}/.aliasrc"
+    link "$(pwd)/.zshrc" "${HOME}/.zshrc"
 }
 

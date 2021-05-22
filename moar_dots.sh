@@ -8,8 +8,12 @@ export COMMAND=$1
 export BACKUPDIR="~/.dotfiles.bak"
 export LIBRARY_DIR="$(pwd)/lib"
 
+export HOME_BIN_DIR=${HOME_BIN_DIR:=~/bin}
+export HOME_ENV_DIR=${HOME_ENV_DIR:=~/.env}
 export VIM_AUTOLOAD_DIR=${VIM_AUTOLOAD_DIR:=~/.vim/autoload}
 export VIM_BUNDLE_DIR=${VIM_BUNDLE_DIR:=~/.vim/bundle}
+export TFENV_DIR=${TFENV_DIR:=~/.tfenv}
+export FZF_FIR=${FZF_DIR:=~/.fzf}
 
 # Include lib helpers
 for FILE in $(find ${LIBRARY_DIR} -type f); do
