@@ -1,0 +1,32 @@
+# Defines custom aliases within this file.
+
+# Configure aliases
+alias aliasconfig="${EDITOR:-vim} $HOME/.aliasrc"
+alias zshconfig="${EDITOR:-vim} $HOME/.zshrc"
+alias zshinit="source $HOME/.zshrc"
+
+# Generic and common aliases
+alias ll="ls -lh"
+alias l="ls -lah"
+alias watch="watch "
+
+
+# Application specific aliases
+# ACK
+alias ackconfig="${EDITOR:-vim} $HOME/.ackrc"
+
+# SSH
+alias sshconfig="${EDITOR:-vim} $HOME/.ssh/config"
+
+# Secrets
+alias secretsconfig="${EDITOR:-vim} $HOME/.env/secrets"
+
+# Minikube
+alias miniconfig="${EDITOR:-vim} $HOME/.minikube/config/config.json"
+
+# Tmux
+alias tmuxconfig="${EDITOR:-vim} $HOME/.tmux.conf"
+
+# Terraform
+alias tf="terraform "
+
