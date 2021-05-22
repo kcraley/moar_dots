@@ -37,14 +37,14 @@ function install() {
         action "Downloading and installing Vim Pathogen"
         curl -LSso "${VIM_AUTOLOAD_DIR}/pathogen.vim" https://tpo.pe/pathogen.vim
     else
-	warn "Skipping Vim Pathogen installation, already exists: ${VIM_AUTOLOAD_DIR}/pathogen.vim"
+        warn "Skipping Vim Pathogen installation, already exists: ${VIM_AUTOLOAD_DIR}/pathogen.vim"
     fi
 
     # Link all Vim Plugins
     for DIR in $(pwd)/vim/pack/*; do
         if [[ -d ${DIR} ]]; then
-	    link "${DIR}" "${VIM_BUNDLE_DIR}/$(basename ${DIR})"
-	fi
+            link "${DIR}" "${VIM_BUNDLE_DIR}/$(basename ${DIR})"
+        fi
     done
 
     # Install Vim configuration
@@ -62,14 +62,14 @@ function install() {
     # Install fzf
     create_dir ${FZF_DIR}
     if [[ ! -d ${FZF_DIR}/.git ]];then
-	action "Cloning fzf repository"
-	git clone https://github.com/junegunn/fzf.git ${FZF_DIR}
+        action "Cloning fzf repository"
+        git clone https://github.com/junegunn/fzf.git ${FZF_DIR}
     else
-	warn "Skipping Git clone, fzf may already be installed"
+        warn "Skipping Git clone, fzf may already be installed"
     fi
     if [[ -f ${FZF_DIR}/install ]]; then
-	action "Installing fzf"
-	${FZF_DIR}/install --all
+        action "Installing fzf"
+        ${FZF_DIR}/install --all
     fi
 
     # Install custom rc files
