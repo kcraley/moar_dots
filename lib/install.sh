@@ -75,6 +75,7 @@ function install() {
     # Install custom rc files
     link "$(pwd)/.ackrc" "${HOME}/.ackrc"
     link "$(pwd)/.aliasrc" "${HOME}/.aliasrc"
+    link "$(pwd)/.imwheelrc" "${HOME}/.imwheelrc"
     link "$(pwd)/.zshrc" "${HOME}/.zshrc"
 }
 

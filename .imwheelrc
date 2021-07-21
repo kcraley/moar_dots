@@ -1,0 +1,5 @@
+# Configurations for various applications
+"^google-chrome$"
+    None, Up, Button4, 4
+    None, Down, Button5, 4
+
