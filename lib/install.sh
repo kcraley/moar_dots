@@ -72,6 +72,10 @@ function install() {
         ${FZF_DIR}/install --all
     fi
 
+    # Install imwheel
+    create_dir ${SYSTEMD_USER_DIR}
+    link "$(pwd)/systemd/user/imwheel.service" "${SYSTEMD_USER_DIR}/imwheel.service"
+
     # Install custom rc files
     link "$(pwd)/.ackrc" "${HOME}/.ackrc"
     link "$(pwd)/.aliasrc" "${HOME}/.aliasrc"
