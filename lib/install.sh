@@ -17,6 +17,11 @@ function install() {
 
     action "Beginning installation"
     
+    # Create XDG Base directories
+    create_dir ${XDG_CONFIG_HOME}
+    create_dir ${XDG_DATA_HOME}
+    create_dir ${XDG_STATE_HOME}
+
     # Initialize Git submodules
     action "Initializing Git submodules"
     git submodule update --init --recursive
@@ -70,15 +75,16 @@ function install() {
     if [[ -f ${FZF_DIR}/install ]]; then
         action "Installing fzf"
         ${FZF_DIR}/install --all
-    fi
-
+    fi 
+    
     # Install imwheel
     create_dir ${SYSTEMD_USER_DIR}
     link "$(pwd)/systemd/user/imwheel.service" "${SYSTEMD_USER_DIR}/imwheel.service"
 
     # Install custom rc files
     link "$(pwd)/.ackrc" "${HOME}/.ackrc"
-    link "$(pwd)/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
+    create_dir ${ALACRITTY_CONFIG_DIR}
+    link "$(pwd)/alacritty.yml" "${ALACRITTY_CONFIG_DIR}/alacritty.yml"
     link "$(pwd)/.aliasrc" "${HOME}/.aliasrc"
     link "$(pwd)/.imwheelrc" "${HOME}/.imwheelrc"
     link "$(pwd)/.zshrc" "${HOME}/.zshrc"
