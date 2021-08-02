@@ -3,6 +3,7 @@ execute pathogen#infect()
 
 syntax on
 set number
+set list
 
 filetype plugin indent on
 
