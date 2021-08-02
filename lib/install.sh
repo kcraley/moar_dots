@@ -81,5 +81,7 @@ function install() {
     link "$(pwd)/.aliasrc" "${HOME}/.aliasrc"
     link "$(pwd)/.imwheelrc" "${HOME}/.imwheelrc"
     link "$(pwd)/.zshrc" "${HOME}/.zshrc"
+
+    source ${HOME}/.zshrc
 }
 
