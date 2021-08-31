@@ -36,3 +36,8 @@ if [[ -r ${FZF_ZSH:-~/.fzf.zsh} ]]; then
 	source ${FZF_ZSH:-~/.fzf.zsh}
 fi
 
+# Load nvm binary
+export NVM_DIR="${HOME}/.nvm"
+[ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh" # Load nvm
+[ -s "${NVM_DIR}/bash_completion" ] && \. "${NVM_DIR}/bash_completion" # Load nvm bash completion
+
