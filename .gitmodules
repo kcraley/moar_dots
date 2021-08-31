@@ -34,3 +34,6 @@
 [submodule "vim/pack/coc.nvim"]
 	path = vim/pack/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
+[submodule "vim/pack/vim-javascript"]
+	path = vim/pack/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
