@@ -16,7 +16,7 @@ function install() {
     fi
 
     action "Beginning installation"
-    
+
     # Create XDG Base directories
     create_dir ${XDG_CONFIG_HOME}
     create_dir ${XDG_DATA_HOME}
@@ -25,7 +25,7 @@ function install() {
     # Initialize Git submodules
     action "Initializing Git submodules"
     git submodule update --init --recursive
-    
+
     # Create custom home directories
     create_dir "${HOME_BIN_DIR}"
     create_dir "${HOME_ENV_DIR}"
@@ -36,7 +36,7 @@ function install() {
     # Create Vim directories
     create_dir ${VIM_AUTOLOAD_DIR}
     create_dir ${VIM_BUNDLE_DIR}
-   
+
     # Install Vim Pathogen
     if [[ ! -f ${VIM_AUTOLOAD_DIR}/pathogen.vim ]]; then
         action "Downloading and installing Vim Pathogen"
@@ -76,7 +76,7 @@ function install() {
         action "Installing fzf"
         ${FZF_DIR}/install --all
     fi 
-    
+
     # Install imwheel
     create_dir ${SYSTEMD_USER_DIR}
     link "$(pwd)/systemd/user/imwheel.service" "${SYSTEMD_USER_DIR}/imwheel.service"
