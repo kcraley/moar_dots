@@ -37,3 +37,6 @@
 [submodule "vim/pack/vim-javascript"]
 	path = vim/pack/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
+[submodule "vim/pack/vim-commentary"]
+	path = vim/pack/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
