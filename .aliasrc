@@ -1,5 +1,9 @@
 # Defines custom aliases within this file.
 
+# Override text editors
+alias vim="${EDITOR} "
+alias vi="${EDITOR} "
+
 # Configure aliases
 alias aliasconfig="${EDITOR:-vim} $HOME/.aliasrc"
 alias zshconfig="${EDITOR:-vim} $HOME/.zshrc"
@@ -30,8 +34,4 @@ alias tmuxconfig="${EDITOR:-vim} $HOME/.tmux.conf"
 # Terraform
 alias tf="terraform "
 alias tg="terragrunt "
-
-# Neovim > Vim
-alias vim="nvim "
-alias vi="nvim "
 
