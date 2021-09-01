@@ -8,8 +8,8 @@ export PATH="$PATH:${HOME}/.tfenv/bin"
 export GPG_TTY=$(tty)
 
 # Configure system editor
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 # Standard Manjaro Zsh Configuration
 export USE_POWERLINE="true"
