@@ -54,6 +54,7 @@ function install() {
 
     # Install Vim configuration
     link "$(pwd)/vim/.vimrc" "${HOME}/.vimrc"
+    link "$(pwd)/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
 
     # Install tfenv
     create_dir ${TFENV_DIR}
