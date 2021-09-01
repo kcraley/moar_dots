@@ -29,4 +29,9 @@ alias tmuxconfig="${EDITOR:-vim} $HOME/.tmux.conf"
 
 # Terraform
 alias tf="terraform "
+alias tg="terragrunt "
+
+# Neovim > Vim
+alias vim="nvim "
+alias vi="nvim "
 
