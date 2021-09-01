@@ -656,3 +656,8 @@ else
   let g:airline_symbols.linenr = ''
 endif
 
+" Import existing vim configuration if it exists
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+source ~/.vimrc
+
