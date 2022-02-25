@@ -1,3 +1,4 @@
 ---
-# Background Opacity
-background_opacity: 0.90
+# Window Opacity
+window:
+  opacity: 0.90
