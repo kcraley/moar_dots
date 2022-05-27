@@ -76,7 +76,7 @@ function install() {
     if [[ -f ${FZF_DIR}/install ]]; then
         action "Installing fzf"
         ${FZF_DIR}/install --all
-    fi 
+    fi
 
     # Install imwheel
     create_dir ${SYSTEMD_USER_DIR}
@@ -87,6 +87,7 @@ function install() {
     create_dir ${ALACRITTY_CONFIG_DIR}
     link "$(pwd)/alacritty.yml" "${ALACRITTY_CONFIG_DIR}/alacritty.yml"
     link "$(pwd)/.aliasrc" "${HOME}/.aliasrc"
+    link "$(pwd)/.editorconfig" "${HOME}/.editorconfig"
     link "$(pwd)/.imwheelrc" "${HOME}/.imwheelrc"
     link "$(pwd)/.zshrc" "${HOME}/.zshrc"
 }
