@@ -3,6 +3,7 @@
 export PATH="$PATH:/usr/local/go/bin:${HOME}/go/bin"
 export PATH="$PATH:${HOME}/bin"
 export PATH="$PATH:${HOME}/.tfenv/bin"
+export GOPATH="${HOME}/go"
 
 # Include GPG
 export GPG_TTY=$(tty)
