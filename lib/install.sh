@@ -55,16 +55,11 @@ function install() {
         ${FZF_DIR}/install --all
     fi
 
-    # Install imwheel
-    create_dir ${SYSTEMD_USER_DIR}
-    link "$(pwd)/systemd/user/imwheel.service" "${SYSTEMD_USER_DIR}/imwheel.service"
-
     # Install custom rc files
     link "$(pwd)/.ackrc" "${HOME}/.ackrc"
     link "$(pwd)/.aliasrc" "${HOME}/.aliasrc"
     link "$(pwd)/.config/nvim" "${XDG_CONFIG_HOME}/nvim"
     link "$(pwd)/.editorconfig" "${HOME}/.editorconfig"
-    link "$(pwd)/.imwheelrc" "${HOME}/.imwheelrc"
     link "$(pwd)/.zshrc" "${HOME}/.zshrc"
 }
 
