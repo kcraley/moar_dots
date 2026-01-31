@@ -62,6 +62,7 @@ function install() {
     # Install custom rc files
     link "$(pwd)/.ackrc" "${HOME}/.ackrc"
     link "$(pwd)/.aliasrc" "${HOME}/.aliasrc"
+    link "$(pwd)/.config/nvim" "${XDG_CONFIG_HOME}/nvim"
     link "$(pwd)/.editorconfig" "${HOME}/.editorconfig"
     link "$(pwd)/.imwheelrc" "${HOME}/.imwheelrc"
     link "$(pwd)/.zshrc" "${HOME}/.zshrc"
