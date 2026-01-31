@@ -10,6 +10,8 @@ This rules contains which tooling and related dotfiles this repository is storin
 
 * Ack
   * .ackrc
+* Editorconfig
+  * .editorconfig
 * Ghostty
   * .config/ghostty/*
 * Hyprland
