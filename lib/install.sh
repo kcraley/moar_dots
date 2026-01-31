@@ -33,29 +33,6 @@ function install() {
         touch -a "${HOME_ENV_DIR}/secrets"
     fi
 
-    # Create Vim directories
-    create_dir ${VIM_AUTOLOAD_DIR}
-    create_dir ${VIM_BUNDLE_DIR}
-
-    # Install Vim Pathogen
-    if [[ ! -f ${VIM_AUTOLOAD_DIR}/pathogen.vim ]]; then
-        action "Downloading and installing Vim Pathogen"
-        curl -LSso "${VIM_AUTOLOAD_DIR}/pathogen.vim" https://tpo.pe/pathogen.vim
-    else
-        warn "Skipping Vim Pathogen installation, already exists: ${VIM_AUTOLOAD_DIR}/pathogen.vim"
-    fi
-
-    # Link all Vim Plugins
-    for DIR in $(pwd)/vim/pack/*; do
-        if [[ -d ${DIR} ]]; then
-            link "${DIR}" "${VIM_BUNDLE_DIR}/$(basename ${DIR})"
-        fi
-    done
-
-    # Install Vim configuration
-    link "$(pwd)/vim/.vimrc" "${HOME}/.vimrc"
-    link "$(pwd)/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
-
     # Install tfenv
     create_dir ${TFENV_DIR}
     if [[ ! -d ${TFENV_DIR}/.git ]]; then
