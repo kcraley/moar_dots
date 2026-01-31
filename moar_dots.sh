@@ -17,7 +17,6 @@ export HOME_ENV_DIR=${HOME_ENV_DIR:=~/.env}
 export VIM_AUTOLOAD_DIR=${VIM_AUTOLOAD_DIR:=~/.vim/autoload}
 export VIM_BUNDLE_DIR=${VIM_BUNDLE_DIR:=~/.vim/bundle}
 
-export ALACRITTY_CONFIG_DIR=${ALACRITTY_CONFIG_DIR:=${XDG_CONFIG_HOME}/alacritty}
 export TFENV_DIR=${TFENV_DIR:=~/.tfenv}
 export FZF_DIR=${FZF_DIR:=~/.fzf}
 export SYSTEMD_USER_DIR=${SYSTEMD_USER_DIR:=${XDG_CONFIG_HOME}/systemd/user}

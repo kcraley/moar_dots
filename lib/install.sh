@@ -61,8 +61,6 @@ function install() {
 
     # Install custom rc files
     link "$(pwd)/.ackrc" "${HOME}/.ackrc"
-    create_dir ${ALACRITTY_CONFIG_DIR}
-    link "$(pwd)/alacritty.yml" "${ALACRITTY_CONFIG_DIR}/alacritty.yml"
     link "$(pwd)/.aliasrc" "${HOME}/.aliasrc"
     link "$(pwd)/.editorconfig" "${HOME}/.editorconfig"
     link "$(pwd)/.imwheelrc" "${HOME}/.imwheelrc"
