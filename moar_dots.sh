@@ -33,28 +33,23 @@ splash
 # Read command line arguements
 case "${COMMAND}" in
     -i|--install)
-        # Run install
         install
         ;;
     -r|--restore)
-        # Run install
         restore
         ;;
     -u|--uninstall)
-        # Run install
         uninstall
         ;;
     -h|--help)
         printusage
         ;;
     '')
-        error "Please select a command..." >&2
-        printusage
+        error "Please select a command. Please use -h or --help to see the available commands." >&2
         exit 1
         ;;
     *)
-        error "Command not found..." >&2
-        printusage
+        error "Command not found. Please use -h or --help to see the available commands." >&2
         exit 1
         ;;
 esac
