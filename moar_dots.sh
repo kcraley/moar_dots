@@ -32,6 +32,9 @@ splash
 
 # Read command line arguements
 case "${COMMAND}" in
+    -b|--backup)
+        backup
+        ;;
     -i|--install)
         install
         ;;

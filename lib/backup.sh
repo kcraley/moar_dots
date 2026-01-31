@@ -1,7 +1,7 @@
-#!/bin/bash
-# This script creates a backup of the existing .dotfile
+#!/usr/bin/env bash
+# This script creates a backup of the existing dotfiles.
 
-# Include lib helpers
-source ./lib/printers.sh
-source ./lib/reqs.sh
+function backup() {
+    action "Backup not yet implemented"
+}
 
