@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 # Requirements for setting up dotfiles
+# Centralized variables for the CLI and lib scripts.
+# PROGRAM, COMMAND, LIBRARY_DIR are set by moar_dots.sh before sourcing.
+
+# XDG base directories
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=~/.config}
+export XDG_STATE_HOME=${XDG_STATE_HOME:=~/.local/state}
+export XDG_DATA_HOME=${XDG_DATA_HOME:=~/.local/share}
+
+# Custom home directories
+export HOME_BIN_DIR=${HOME_BIN_DIR:=~/bin}
+export HOME_ENV_DIR=${HOME_ENV_DIR:=~/.env}
+
+# Directory where dotfile backups (compressed tarballs) are stored.
+DOTS_BACKUP_DIR="${XDG_CONFIG_HOME}/.dots"
 
 # Mapping of dotfile sources (repo-relative) to destination path templates.
 # Destinations use ${HOME} or ${XDG_CONFIG_HOME}; expanded at install time.
