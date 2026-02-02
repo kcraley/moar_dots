@@ -22,10 +22,6 @@ function install() {
     create_dir ${XDG_DATA_HOME}
     create_dir ${XDG_STATE_HOME}
 
-    # Initialize Git submodules
-    action "Initializing Git submodules"
-    git submodule update --init --recursive
-
     # Create custom home directories
     create_dir "${HOME_BIN_DIR}"
     create_dir "${HOME_ENV_DIR}"
