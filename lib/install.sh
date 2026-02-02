@@ -55,11 +55,14 @@ function install() {
         ${FZF_DIR}/install --all
     fi
 
-    # Install custom rc files
-    link "$(pwd)/.ackrc" "${HOME}/.ackrc"
-    link "$(pwd)/.aliasrc" "${HOME}/.aliasrc"
-    link "$(pwd)/.config/nvim" "${XDG_CONFIG_HOME}/nvim"
-    link "$(pwd)/.editorconfig" "${HOME}/.editorconfig"
-    link "$(pwd)/.zshrc" "${HOME}/.zshrc"
+    # Install dotfiles from mapping (lib/reqs.sh DOTFILES).
+    for entry in "${DOTFILES[@]}"; do
+        src="${entry%%:*}"
+        dest_template="${entry#*:}"
+        dest="$(eval echo "$dest_template")"
+        if [[ -e "$(pwd)/${src}" ]]; then
+            link "$(pwd)/${src}" "${dest}"
+        fi
+    done
 }
 
