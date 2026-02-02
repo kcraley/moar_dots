@@ -19,7 +19,7 @@ COL_LIGHT_CYAN="\e[96m"
 
 # Printer helpers
 function action() {
-    echo -e "$COL_BLUE[action]$COL_RESET $1... "
+    echo -e "$COL_BLUE[action]$COL_RESET $1..."
 }
 
 function error() {
@@ -35,7 +35,7 @@ function prompt() {
 }
 
 function running() {
-    echo -en "$COL_YELLOW ⇒ $COL_RESET: $1 "
+    echo -en "$COL_YELLOW ⇒ $COL_RESET: $1"
 }
 
 function warn() {
