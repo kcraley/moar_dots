@@ -12,6 +12,10 @@ This rule helps with the development process and testing of @moad_dots.sh and @.
 
 Favor simplicity and portability during the development process.  The purpose of this repository is so that it can be shared amongst various systems.
 
+Ensure all of the files are read into context as a standard operating procedure prior to making any development changes.
+
+Favor centralizing variables in the reqs.sh file, that multiple subcommands and functions may leverage.  Examples includes the default ${XDG_CONFIG_HOME}/.dots/ directory as the location for storing backups.
+
 ## Documentation
 
 This rule helps generate documentation:
