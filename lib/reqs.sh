@@ -13,7 +13,8 @@ export HOME_BIN_DIR=${HOME_BIN_DIR:=~/bin}
 export HOME_ENV_DIR=${HOME_ENV_DIR:=~/.env}
 
 # Directory where dotfile backups (compressed tarballs) are stored.
-DOTS_BACKUP_DIR="${XDG_CONFIG_HOME}/.dots"
+DOTS_CONFIG_DIR="${XDG_CONFIG_HOME}/dots"
+DOTS_BACKUP_DIR="${DOTS_CONFIG_DIR}/backup"
 
 # Mapping of dotfile sources (repo-relative) to destination path templates.
 # Destinations use ${HOME} or ${XDG_CONFIG_HOME}; expanded at install time.
