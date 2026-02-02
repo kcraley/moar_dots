@@ -33,28 +33,6 @@ function install() {
         touch -a "${HOME_ENV_DIR}/secrets"
     fi
 
-    # Install tfenv
-    create_dir ${TFENV_DIR}
-    if [[ ! -d ${TFENV_DIR}/.git ]]; then
-        action "Cloning tfenv repository"
-        git clone https://github.com/tfutils.tfenv.git ${TFENV_DIR}
-    else
-        warn "Skipping Git clone, tfenv may already be installed"
-    fi
-
-    # Install fzf
-    create_dir ${FZF_DIR}
-    if [[ ! -d ${FZF_DIR}/.git ]];then
-        action "Cloning fzf repository"
-        git clone https://github.com/junegunn/fzf.git ${FZF_DIR}
-    else
-        warn "Skipping Git clone, fzf may already be installed"
-    fi
-    if [[ -f ${FZF_DIR}/install ]]; then
-        action "Installing fzf"
-        ${FZF_DIR}/install --all
-    fi
-
     # Install dotfiles from mapping (lib/reqs.sh DOTFILES).
     for entry in "${DOTFILES[@]}"; do
         src="${entry%%:*}"
