@@ -25,7 +25,7 @@ function backup() {
     fi
 
     action "Creating backup at ${backup_path}"
-    # change into the user's home directory so tar paths are relative to $HOME
+    # Change into the user's home directory so tar paths are relative to $HOME
     if ! pushd "${HOME}" > /dev/null 2>&1; then
         error "Failed to change directory to ${HOME}"
         return 1
@@ -35,14 +35,7 @@ function backup() {
     # archive doesn't contain absolute paths.
     local rel_files=()
     for f in "${files_to_backup[@]}"; do
-        if [[ "$f" == "${HOME}" ]]; then
-            rel_files+=( "." )
-        elif [[ "$f" == "${HOME}/"* ]]; then
-            rel_files+=( "${f#${HOME}/}" )
-        else
-            # leave non-home paths as-is
-            rel_files+=( "$f" )
-        fi
+        rel_files+=( "$(to_relative_path "$HOME" "$f")" )
     done
 
     if tar -czf "${backup_path}" "${rel_files[@]}"; then
@@ -53,6 +46,6 @@ function backup() {
         return 1
     fi
 
-    # return to the original directory
+    # Return to the original directory
     popd > /dev/null 2>&1
 }
