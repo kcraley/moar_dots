@@ -1,5 +1,5 @@
-#!/bin/bash
-# moar_dotz.sh - This is the main entrypoint for managing
+#!/usr/bin/env bash
+# moar_dots - This is the main entrypoint for managing
 # all dotfile and custom environment configuration.
 
 # Entrypoint-only variables (must be set before sourcing lib)
