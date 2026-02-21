@@ -61,6 +61,6 @@ function printusage() {
     echo "-b  --backup         Create a backup of current dotfiles" >&2
     echo "-h  --help           Print this help message" >&2
     echo "-i  --install        Install the new configuration of dotfiles" >&2
-    echo "-r  --restore        Restore dotfiles from an old configuration" >&2
+    echo "-r  --restore [path] Restore dotfiles from a backup (interactive if path omitted)" >&2
     echo "-u  --uninstall      Uninstall an existing version of moar_dotz" >&2
 }

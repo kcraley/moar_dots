@@ -25,7 +25,7 @@ case "${COMMAND}" in
         install
         ;;
     -r|--restore)
-        restore
+        restore "$2"
         ;;
     -u|--uninstall)
         uninstall

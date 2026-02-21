@@ -16,6 +16,11 @@ export HOME_ENV_DIR=${HOME_ENV_DIR:=~/.env}
 DOTS_CONFIG_DIR="${XDG_CONFIG_HOME}/dots"
 DOTS_BACKUP_DIR="${DOTS_CONFIG_DIR}/backup"
 
+# Staging directory where repo dotfiles are copied before symlinking.
+# Profile symlinks point here, allowing the underlying files to be swapped
+# without touching the repo or the user's profile paths directly.
+DOTS_INSTALL_DIR="${DOTS_CONFIG_DIR}/install"
+
 # Mapping of dotfile sources (repo-relative) to destination path templates.
 # Destinations use ${HOME} or ${XDG_CONFIG_HOME}; expanded at install time.
 # Format: "source:dest_template" per entry.
