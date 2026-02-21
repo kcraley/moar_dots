@@ -8,7 +8,7 @@
 function install() {
     local repo_dir="$(pwd)"
 
-    action "We are going to install the dotfiles from moar_dotz"
+    action "We are going to install the dotfiles from moar_dots"
     prompt "Would you like to continue? [y|n]: " && read response
     if [[ $response =~ (yes|y|Y) ]]; then
         action "Let's get started!"
