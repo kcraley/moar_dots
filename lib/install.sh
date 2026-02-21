@@ -6,6 +6,8 @@
 # This is the main install function which is called
 # when `./moar_dots.sh -i` is executed.
 function install() {
+    local repo_dir="$(pwd)"
+
     action "We are going to install the dotfiles from moar_dotz"
     prompt "Would you like to continue? [y|n]: " && read response
     if [[ $response =~ (yes|y|Y) ]]; then
@@ -18,77 +20,67 @@ function install() {
     action "Beginning installation"
 
     # Create XDG Base directories
-    create_dir ${XDG_CONFIG_HOME}
-    create_dir ${XDG_DATA_HOME}
-    create_dir ${XDG_STATE_HOME}
-
-    # Initialize Git submodules
-    action "Initializing Git submodules"
-    git submodule update --init --recursive
+    create_dir "${XDG_CONFIG_HOME}"
+    create_dir "${XDG_DATA_HOME}"
+    create_dir "${XDG_STATE_HOME}"
 
     # Create custom home directories
     create_dir "${HOME_BIN_DIR}"
     create_dir "${HOME_ENV_DIR}"
-    if [[ -f "${HOME_ENV_DIR}" ]]; then
+    if [[ -d "${HOME_ENV_DIR}" ]]; then
         touch -a "${HOME_ENV_DIR}/secrets"
     fi
 
-    # Create Vim directories
-    create_dir ${VIM_AUTOLOAD_DIR}
-    create_dir ${VIM_BUNDLE_DIR}
+    # Create the install staging directory where repo dotfiles are copied.
+    # Profile symlinks point here so the underlying files can be swapped
+    # without touching the repo or the user's profile paths directly.
+    create_dir "${DOTS_INSTALL_DIR}"
 
-    # Install Vim Pathogen
-    if [[ ! -f ${VIM_AUTOLOAD_DIR}/pathogen.vim ]]; then
-        action "Downloading and installing Vim Pathogen"
-        curl -LSso "${VIM_AUTOLOAD_DIR}/pathogen.vim" https://tpo.pe/pathogen.vim
-    else
-        warn "Skipping Vim Pathogen installation, already exists: ${VIM_AUTOLOAD_DIR}/pathogen.vim"
-    fi
+    for entry in "${DOTFILES[@]}"; do
+        local src="${entry%%:*}"
+        local dest_template="${entry#*:}"
+        local dest
+        dest="$(eval echo "$dest_template")"
+        # Strip trailing slash so ln -s targets the path, not inside it
+        dest="${dest%/}"
 
-    # Link all Vim Plugins
-    for DIR in $(pwd)/vim/pack/*; do
-        if [[ -d ${DIR} ]]; then
-            link "${DIR}" "${VIM_BUNDLE_DIR}/$(basename ${DIR})"
+        local src_path="${repo_dir}/${src}"
+        local install_path="${DOTS_INSTALL_DIR}/${src}"
+
+        if [[ ! -e "${src_path}" ]]; then
+            warn "Source not found, skipping: ${src_path}"
+            continue
         fi
+
+        # Ensure intermediate directories exist inside the install dir
+        mkdir -p "$(dirname "${install_path}")"
+
+        # Copy the source into the install staging directory.
+        # Use the contents form (src/.) for directories to avoid double-nesting
+        # when the target already exists.
+        if [[ -d "${src_path}" ]]; then
+            running "Staging directory: ${src} -> ${install_path}\n"
+            mkdir -p "${install_path}"
+            cp -rf "${src_path}/." "${install_path}/"
+        else
+            running "Staging file: ${src} -> ${install_path}\n"
+            cp -f "${src_path}" "${install_path}"
+        fi
+
+        # If dest already exists as a real (non-symlink) directory we cannot
+        # atomically replace it with a symlink—warn and skip.
+        if [[ -d "${dest}" && ! -L "${dest}" ]]; then
+            warn "Real directory exists at ${dest}. Run --backup first, then remove it manually."
+            continue
+        fi
+
+        # Remove a stale symlink so ln -s can place the new one cleanly.
+        if [[ -L "${dest}" ]]; then
+            rm "${dest}"
+        fi
+
+        link "${install_path}" "${dest}"
     done
 
-    # Install Vim configuration
-    link "$(pwd)/vim/.vimrc" "${HOME}/.vimrc"
-    link "$(pwd)/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
-
-    # Install tfenv
-    create_dir ${TFENV_DIR}
-    if [[ ! -d ${TFENV_DIR}/.git ]]; then
-        action "Cloning tfenv repository"
-        git clone https://github.com/tfutils.tfenv.git ${TFENV_DIR}
-    else
-        warn "Skipping Git clone, tfenv may already be installed"
-    fi
-
-    # Install fzf
-    create_dir ${FZF_DIR}
-    if [[ ! -d ${FZF_DIR}/.git ]];then
-        action "Cloning fzf repository"
-        git clone https://github.com/junegunn/fzf.git ${FZF_DIR}
-    else
-        warn "Skipping Git clone, fzf may already be installed"
-    fi
-    if [[ -f ${FZF_DIR}/install ]]; then
-        action "Installing fzf"
-        ${FZF_DIR}/install --all
-    fi
-
-    # Install imwheel
-    create_dir ${SYSTEMD_USER_DIR}
-    link "$(pwd)/systemd/user/imwheel.service" "${SYSTEMD_USER_DIR}/imwheel.service"
-
-    # Install custom rc files
-    link "$(pwd)/.ackrc" "${HOME}/.ackrc"
-    create_dir ${ALACRITTY_CONFIG_DIR}
-    link "$(pwd)/alacritty.yml" "${ALACRITTY_CONFIG_DIR}/alacritty.yml"
-    link "$(pwd)/.aliasrc" "${HOME}/.aliasrc"
-    link "$(pwd)/.editorconfig" "${HOME}/.editorconfig"
-    link "$(pwd)/.imwheelrc" "${HOME}/.imwheelrc"
-    link "$(pwd)/.zshrc" "${HOME}/.zshrc"
+    ok "Installation complete"
 }
-

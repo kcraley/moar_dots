@@ -1,0 +1,31 @@
+---
+description: Development workflow standards for all files
+glob: *
+alwaysApply: true
+---
+
+# Automation Development and Documentation
+
+## Development
+
+This rule helps with the development process and testing of @moad_dots.sh and @./lib/**/* files:
+
+Favor simplicity and portability during the development process.  The purpose of this repository is so that it can be shared amongst various systems.
+
+Ensure all of the files are read into context as a standard operating procedure prior to making any development changes.
+
+Favor centralizing variables in the reqs.sh file, that multiple subcommands and functions may leverage.  Examples includes the default ${XDG_CONFIG_HOME}/.dots/ directory as the location for storing backups.
+
+## Documentation
+
+This rule helps generate documentation:
+
+When writing new documentation:
+
+* Extract code comments.
+* Analyze all markdown documents.
+* Generate new markdown documents.
+
+When making architectural changes include documentation in the @READMD.md file.  Always include an updated example of the printed usage statement of @moar_dots.sh.
+
+When new sections within the @README.md file, update the table of contents with links directly to the newly created section.  Ensure the ordering of the table of contents matches the ordering of the sections as they are written.

@@ -19,7 +19,7 @@ COL_LIGHT_CYAN="\e[96m"
 
 # Printer helpers
 function action() {
-    echo -e "$COL_BLUE[action]$COL_RESET $1... "
+    echo -e "$COL_BLUE[action]$COL_RESET $1..."
 }
 
 function error() {
@@ -35,7 +35,7 @@ function prompt() {
 }
 
 function running() {
-    echo -en "$COL_YELLOW ⇒ $COL_RESET: $1 "
+    echo -en "$COL_YELLOW ⇒ $COL_RESET: $1"
 }
 
 function warn() {
@@ -55,11 +55,12 @@ function splash() {
 }
 
 function printusage() {
-    echo "Usage: $program [-option]" >&2
+    echo "Usage: ${PROGRAM:-moar_dots.sh} [-option]" >&2
     echo "" >&2
     echo "Options:" >&2
+    echo "-b  --backup         Create a backup of current dotfiles" >&2
     echo "-h  --help           Print this help message" >&2
     echo "-i  --install        Install the new configuration of dotfiles" >&2
-    echo "-r  --restore        Restore dotfiles from an old configuration" >&2
-    echo "-u  --unintall       Uninstall an existing version of moar_dotz" >&2
+    echo "-r  --restore [path] Restore dotfiles from a backup (interactive if path omitted)" >&2
+    echo "-u  --uninstall      Uninstall an existing version of moar_dotz" >&2
 }

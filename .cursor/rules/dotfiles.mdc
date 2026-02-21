@@ -1,0 +1,31 @@
+---
+description: Dotfiles which are the specific files being stored within this repo via automation from the cli.
+glob: .config/**/*,.ackrc,.aliasrc,.zshrc
+alwaysApply: false
+---
+
+# Tooling and Related Dotfiles
+
+This rules contains which tooling and related dotfiles this repository is storing.  A list of tools and their subsequent dotfiles below.
+
+* Ack
+  * .ackrc
+* Editorconfig
+  * .editorconfig
+* Ghostty
+  * .config/ghostty/*
+* Hyprland
+  * .config/hypr/hyprland.conf
+  * .config/hypr/conf/*.conf
+* Hyprlock
+  * .config/hypr/hyprlock.conf
+* Hyprpaper
+  * .config/hypr/hyprpaper.conf
+* Neovim
+  * .config/nvim/**/*
+* Waybar
+  * .config/waybar/config.jsonc
+  * .config/waybar/style.css
+* Zsh
+  * .aliasrc
+  * .zshrc

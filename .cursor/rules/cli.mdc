@@ -1,0 +1,46 @@
+---
+description: CLI and bash script standards for moar_dots entrypoint and lib
+globs: moar_dots.sh,lib/**/*.sh
+alwaysApply: false
+---
+
+# CLI and Bash Script Standards
+
+When working in `moar_dots.sh` or `lib/`, **all logic must be implemented in Bash**. Do not introduce Python, Node, or other runtimes for CLI behavior.
+
+## Conventions
+
+- **Shebang**: Use `#!/usr/bin/env bash` or `#!/bin/bash` at the top of every script.
+- **Entrypoint**: `moar_dots.sh` sets globals, sources all files in `lib/`, then dispatches via `case "${COMMAND}" in ... esac`. Keep the case block for routing only; put real logic in lib functions.
+- **Lib scripts**: One concern per file (e.g. `utils.sh`, `printers.sh`). Define **functions** that are called from the entrypoint or other lib scripts. Scripts are sourced, not executed as subprocesses.
+- **Shared state**: Use exported variables and sourced helpers (e.g. `action`, `error`, `create_dir`) from `lib/`; do not duplicate them.
+
+## Examples
+
+```bash
+# ✅ GOOD – logic in a lib function (lib/install.sh)
+function install() {
+    action "Beginning installation"
+    create_dir "${HOME_BIN_DIR}"
+    # ...
+}
+```
+
+```bash
+# ❌ BAD – logic in another language
+# Calling python or node for CLI behavior in this project
+```
+
+```bash
+# ✅ GOOD – entrypoint only routes (moar_dots.sh)
+case "${COMMAND}" in
+    -i|--install) install ;;
+    -h|--help)    printusage ;;
+esac
+```
+
+New subcommands: add a case branch in `moar_dots.sh` and implement the behavior in a new or existing `lib/*.sh` function.
+
+## Architecture
+
+Maintain a mapping of applications to configuration files or directories.  When implementing logic for any of the subcommands like install, restore or uninstall reference the mapping of files.

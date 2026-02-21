@@ -1,28 +1,36 @@
 #!/usr/bin/env bash
 # Requirements for setting up dotfiles
+# Centralized variables for the CLI and lib scripts.
+# PROGRAM, COMMAND, LIBRARY_DIR are set by moar_dots.sh before sourcing.
 
-function require_node() {
-    running "node -v"
-    node -v
-    if [[ $? != 0 ]]; then
-        warning "Node not found, install via package manager"
-        running "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
-        curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-        running "sudo apt-get install -y nodejs"
-        sudo apt-get install -y nodejs
-    else
-        running "Node is already installed"
-        ok
-    fi
-}
+# XDG base directories
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=~/.config}
+export XDG_STATE_HOME=${XDG_STATE_HOME:=~/.local/state}
+export XDG_DATA_HOME=${XDG_DATA_HOME:=~/.local/share}
 
-function require_ohmyzsh() {
-    running "Installing Oh-My-Zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    if [[ $? != 0 ]]; then
-        ok
-    else
-        error
-        exit 1
-    fi
-}
+# Custom home directories
+export HOME_BIN_DIR=${HOME_BIN_DIR:=~/bin}
+export HOME_ENV_DIR=${HOME_ENV_DIR:=~/.env}
+
+# Directory where dotfile backups (compressed tarballs) are stored.
+DOTS_CONFIG_DIR="${XDG_CONFIG_HOME}/dots"
+DOTS_BACKUP_DIR="${DOTS_CONFIG_DIR}/backup"
+
+# Staging directory where repo dotfiles are copied before symlinking.
+# Profile symlinks point here, allowing the underlying files to be swapped
+# without touching the repo or the user's profile paths directly.
+DOTS_INSTALL_DIR="${DOTS_CONFIG_DIR}/install"
+
+# Mapping of dotfile sources (repo-relative) to destination path templates.
+# Destinations use ${HOME} or ${XDG_CONFIG_HOME}; expanded at install time.
+# Format: "source:dest_template" per entry.
+DOTFILES=(
+	".ackrc:\${HOME}/.ackrc"
+	".aliasrc:\${HOME}/.aliasrc"
+	".config/ghostty:\${XDG_CONFIG_HOME}/ghostty/"
+	".config/hypr:\${XDG_CONFIG_HOME}/hypr/"
+	".config/nvim:\${XDG_CONFIG_HOME}/nvim/"
+	".config/waybar:\${XDG_CONFIG_HOME}/waybar/"
+	".editorconfig:\${HOME}/.editorconfig"
+	".zshrc:\${HOME}/.zshrc"
+)
