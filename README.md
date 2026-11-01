@@ -38,7 +38,7 @@ Options:
 -u  --uninstall      Uninstall an existing version of moar_dots
 ```
 
-The recommended order of operations for a fresh setup is: **backup → install**. To revert: **uninstall** (which offers an integrated restore step), or run **restore** independently at any time.
+For a fresh setup, run **install**, which backs up anything it replaces. To revert: **uninstall** (which offers an integrated restore step), or run **restore** independently at any time.
 
 ## Backup
 
@@ -50,7 +50,9 @@ The backup command snapshots the dotfiles currently active in your profile and s
 
 ## Install
 
-The install command copies every dotfile from the local repository into the staging directory at `~/.config/dots/install/`, then creates symlinks from the expected profile locations (e.g. `~/.zshrc`, `~/.config/nvim/`) pointing into that staging directory. Keeping the staging directory as the intermediary means the underlying files can be swapped out independently of the repository or the live profile paths. If a real directory already exists at a destination, install will warn and skip it — remove it manually after running a backup first.
+The install command creates symlinks from the expected profile locations (e.g. `~/.zshrc`, `~/.config/nvim/`) directly into this repository. Edits to live files therefore land in the git working tree, ready to review with `git diff` and commit. Because the links are absolute, reinstall after moving the repository.
+
+Before anything is changed, install lists the existing files and directories it will replace. It then saves them in a backup, and aborts without changing anything if that backup fails. Destinations that are already linked are left alone, so install is safe to re-run.
 
 ```sh
 ./moar_dots --install
@@ -70,7 +72,7 @@ The restore command extracts a previously created backup archive back to its ori
 
 ## Uninstall
 
-The uninstall command removes all symlinks from the user profile that point into the staging directory, then deletes `~/.config/dots/install/`. Only symlinks that were created by moar_dots are touched — anything pointing elsewhere is left intact. Backups in `~/.config/dots/backup/` are never removed. After the cleanup, uninstall offers to run restore interactively so the user's original dotfiles can be returned to their profile in the same operation.
+The uninstall command removes all symlinks from the user profile that point into this repository. Only symlinks that were created by moar_dots are touched — anything pointing elsewhere is left intact. Backups in `~/.config/dots/backup/` are never removed. After the cleanup, uninstall offers to run restore interactively so the user's original dotfiles can be returned to their profile in the same operation.
 
 ```sh
 ./moar_dots --uninstall
