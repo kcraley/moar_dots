@@ -15,8 +15,8 @@ This rules contains which tooling and related dotfiles this repository is storin
 * Ghostty
   * .config/ghostty/*
 * Hyprland
-  * .config/hypr/hyprland.conf
-  * .config/hypr/conf/*.conf
+  * .config/hypr/hyprland.lua
+  * .config/hypr/conf/*.lua
 * Hyprlock
   * .config/hypr/hyprlock.conf
 * Hyprpaper
