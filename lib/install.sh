@@ -4,13 +4,34 @@
 # and the associated configuration files.
 
 # This is the main install function which is called
-# when `./moar_dots.sh -i` is executed.
+# when `./moar_dots -i` is executed.
+#
+# Each profile destination becomes a symlink directly into this repository, so
+# edits made to live files land in the git working tree. Anything that would be
+# replaced is captured in a backup first.
 function install() {
-    local repo_dir="$(pwd)"
+    # Work out what would be replaced so it can be shown before confirming.
+    local to_replace=()
+    for entry in "${DOTFILES[@]}"; do
+        local src="${entry%%:*}"
+        local dest
+        dest="$(dotfile_dest "${entry}")"
+
+        if [[ -e "${dest}" ]] && ! is_linked "${dest}" "${REPO_DIR}/${src}"; then
+            to_replace+=( "${dest}" )
+        fi
+    done
 
     action "We are going to install the dotfiles from moar_dots"
+    if [[ ${#to_replace[@]} -gt 0 ]]; then
+        warn "These will be backed up and then replaced with symlinks:"
+        for dest in "${to_replace[@]}"; do
+            running "${dest}\n"
+        done
+    fi
+
     prompt "Would you like to continue? [y|n]: " && read response
-    if [[ $response =~ (yes|y|Y) ]]; then
+    if [[ $response =~ ^(y|Y|yes)$ ]]; then
         action "Let's get started!"
     else
         action "Aborting installation..."
@@ -18,6 +39,14 @@ function install() {
     fi
 
     action "Beginning installation"
+
+    # Never remove anything until a backup of it exists.
+    if [[ ${#to_replace[@]} -gt 0 ]]; then
+        if ! backup; then
+            error "Backup failed, nothing was changed. Aborting installation."
+            exit 1
+        fi
+    fi
 
     # Create XDG Base directories
     create_dir "${XDG_CONFIG_HOME}"
@@ -31,55 +60,26 @@ function install() {
         touch -a "${HOME_ENV_DIR}/secrets"
     fi
 
-    # Create the install staging directory where repo dotfiles are copied.
-    # Profile symlinks point here so the underlying files can be swapped
-    # without touching the repo or the user's profile paths directly.
-    create_dir "${DOTS_INSTALL_DIR}"
-
     for entry in "${DOTFILES[@]}"; do
         local src="${entry%%:*}"
-        local dest_template="${entry#*:}"
+        local src_path="${REPO_DIR}/${src}"
         local dest
-        dest="$(eval echo "$dest_template")"
-        # Strip trailing slash so ln -s targets the path, not inside it
-        dest="${dest%/}"
-
-        local src_path="${repo_dir}/${src}"
-        local install_path="${DOTS_INSTALL_DIR}/${src}"
+        dest="$(dotfile_dest "${entry}")"
 
         if [[ ! -e "${src_path}" ]]; then
             warn "Source not found, skipping: ${src_path}"
             continue
         fi
 
-        # Ensure intermediate directories exist inside the install dir
-        mkdir -p "$(dirname "${install_path}")"
-
-        # Copy the source into the install staging directory.
-        # Use the contents form (src/.) for directories to avoid double-nesting
-        # when the target already exists.
-        if [[ -d "${src_path}" ]]; then
-            running "Staging directory: ${src} -> ${install_path}\n"
-            mkdir -p "${install_path}"
-            cp -rf "${src_path}/." "${install_path}/"
-        else
-            running "Staging file: ${src} -> ${install_path}\n"
-            cp -f "${src_path}" "${install_path}"
-        fi
-
-        # If dest already exists as a real (non-symlink) directory we cannot
-        # atomically replace it with a symlink—warn and skip.
-        if [[ -d "${dest}" && ! -L "${dest}" ]]; then
-            warn "Real directory exists at ${dest}. Run --backup first, then remove it manually."
+        # Checked by resolved path so a destination that already reaches the
+        # repository is never removed.
+        if is_linked "${dest}" "${src_path}"; then
+            running "Already linked: ${dest}\n"
             continue
         fi
 
-        # Remove a stale symlink so ln -s can place the new one cleanly.
-        if [[ -L "${dest}" ]]; then
-            rm "${dest}"
-        fi
-
-        link "${install_path}" "${dest}"
+        rm -rf -- "${dest}"
+        link "${src_path}" "${dest}"
     done
 
     ok "Installation complete"

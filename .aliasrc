@@ -1,37 +1,24 @@
-# Defines custom aliases within this file.
+# A set of custom aliases allowing for managing ZSH.
+alias zshinit="source ~/.zshrc"
 
-# Override text editors
-alias vim="${EDITOR} "
-alias vi="${EDITOR} "
+# A set of custom aliases for managing various configurations.
+alias config_alias="${EDITOR} ~/.aliasrc"
+alias config_hypr="${EDITOR} ~/.config/hypr/conf/"
+alias config_ghostty="${EDITOR} ~/.config/ghostty/config"
+alias config_nvim="${EDITOR} ~/.config/nvim/"
+alias config_spaceship="${EDITOR} ~/.config/spaceship.zsh"
+alias config_zsh="${EDITOR} ~/.zshrc"
+alias config_waybar="${EDITOR} ~/.config/waybar/"
+alias config_eza="${EDITOR} ~/.config/eza/theme.yml"
+alias config_hyprlock="${EDITOR} ~/.config/hypr/hyprlock.conf"
 
-# Configure aliases
-alias aliasconfig="${EDITOR:-vim} $HOME/.aliasrc"
-alias zshconfig="${EDITOR:-vim} $HOME/.zshrc"
-alias zshinit="source $HOME/.zshrc"
-
-# Generic and common aliases
-alias ll="ls -lh"
-alias l="ls -lah"
-alias watch="watch "
-
-
-# Application specific aliases
-# ACK
-alias ackconfig="${EDITOR:-vim} $HOME/.ackrc"
-
-# SSH
-alias sshconfig="${EDITOR:-vim} $HOME/.ssh/config"
-
-# Secrets
-alias secretsconfig="${EDITOR:-vim} $HOME/.env/secrets"
-
-# Minikube
-alias miniconfig="${EDITOR:-vim} $HOME/.minikube/config/config.json"
-
-# Tmux
-alias tmuxconfig="${EDITOR:-vim} $HOME/.tmux.conf"
-
-# Terraform
-alias tf="terraform "
-alias tg="terragrunt "
-
+# A set of standard terminal helpers.
+alias docker="podman "
+alias env="env | sort -f | ${PAGER}"
+alias l='eza -aalgh --color=always --icons=always --git --group-directories-first'
+alias ll='eza -lagh --color=always --icons=always --git --group-directories-first --show-symlinks'
+alias lt='eza -lghT --color=always --icons=always --git --group-directories-first --show-symlinks'
+alias task='go-task '
+alias k='kubectl '
+alias vim='nvim'
+alias watch='watch '

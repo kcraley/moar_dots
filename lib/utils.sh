@@ -2,9 +2,6 @@
 # This is a collection of utility functions that
 # are resused across moar dots actions.
 
-# Load printers
-source ./printers.sh
-
 function create_dir() {
     if [[ ! -d "$1" ]]; then
 	action "Creating directory: $1"
@@ -17,6 +14,27 @@ function create_dir() {
 function link() {
     action "Linking file: $1 -> $2"
     ln -s -f "$1" "$2"
+}
+
+#
+# Expand a DOTFILES entry into its profile destination path.
+# Usage: dotfile_dest [entry]
+# Example:
+#   dotfile_dest ".config/nvim:\${XDG_CONFIG_HOME}/nvim/" -> "/home/user/.config/nvim"
+#
+function dotfile_dest() {
+    local dest
+    dest="$(eval echo "${1#*:}")"
+    # Strip the trailing slash so paths refer to a symlink, not inside it
+    printf '%s' "${dest%/}"
+}
+
+#
+# Check whether a profile destination resolves to a path in this repository.
+# Usage: is_linked [dest] [src-path]
+#
+function is_linked() {
+    [[ "$(readlink -f "$1")" == "$2" ]]
 }
 
 #

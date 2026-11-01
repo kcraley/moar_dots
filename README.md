@@ -6,8 +6,10 @@ Which do you see, 21 or 74? Be care, the devil is in the details!
 ## Contents
   * [About](#About)
   * [Usage](#Usage)
+  * [Packages](#Packages)
   * [Backup](#Backup)
   * [Install](#Install)
+  * [Status](#Status)
   * [Restore](#Restore)
   * [Uninstall](#Uninstall)
   * [Disclaimer](#Disclaimer)
@@ -17,7 +19,7 @@ Your dot files speak volume and are a general reflection of one's personality. S
 
 ## Usage
 
-Run `./moar_dots` from the repo root with one of the subcommand flags below. Pass `-h` or `--help` to see all available options at any time.
+Run `moar_dots` with one of the subcommand flags below. It can be run from any directory. Pass `-h` or `--help` to see all available options at any time.
 
 ```text
  .::       .::                                .:::::                .::
@@ -35,14 +37,32 @@ Options:
 -h  --help           Print this help message
 -i  --install        Install the new configuration of dotfiles
 -r  --restore [path] Restore dotfiles from a backup (interactive if path omitted)
+-s  --status         Show how live dotfiles compare to this repository
 -u  --uninstall      Uninstall an existing version of moar_dots
 ```
 
-The recommended order of operations for a fresh setup is: **backup → install**. To revert: **uninstall** (which offers an integrated restore step), or run **restore** independently at any time.
+For a fresh setup, run **install**, which backs up anything it replaces. To revert: **uninstall** (which offers an integrated restore step), or run **restore** independently at any time.
+
+## Packages
+
+moar_dots only manages configuration files and does not install software. `packages.txt` lists the Arch repository packages the dotfiles depend on, and `packages-aur.txt` lists those that come from the AUR. Install them on a new system before running install. The AUR command assumes an AUR helper such as `yay`.
+
+```sh
+sudo pacman -S --needed - < packages.txt
+yay -S --needed - < packages-aur.txt
+```
+
+Oh My Zsh and the Spaceship prompt are not packaged, so install them separately. `--keep-zshrc` stops the installer from changing an existing `~/.zshrc`.
+
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+git clone --depth=1 https://github.com/spaceship-prompt/spaceship-prompt.git ~/.oh-my-zsh/custom/themes/spaceship-prompt
+ln -s ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
+```
 
 ## Backup
 
-The backup command snapshots the dotfiles currently active in your profile and saves them as a compressed tarball in `~/.config/dots/backup/`. Each archive is named with a timestamp (`YYYYMMDD-HH:MM:SS.tar.gz`) so multiple backups can coexist without overwriting one another. Always run a backup before installing for the first time so that a clean restore point exists if you ever need to revert.
+The backup command snapshots the dotfiles currently active in your profile and saves them as a compressed tarball in `~/.config/dots/backup/`. Each archive is named with a timestamp (`YYYYMMDD-HH:MM:SS.tar.gz`) so multiple backups can coexist without overwriting one another. Archives hold real file contents, so a backup can be taken at any time and still restores correctly after an uninstall.
 
 ```sh
 ./moar_dots --backup
@@ -50,10 +70,20 @@ The backup command snapshots the dotfiles currently active in your profile and s
 
 ## Install
 
-The install command copies every dotfile from the local repository into the staging directory at `~/.config/dots/install/`, then creates symlinks from the expected profile locations (e.g. `~/.zshrc`, `~/.config/nvim/`) pointing into that staging directory. Keeping the staging directory as the intermediary means the underlying files can be swapped out independently of the repository or the live profile paths. If a real directory already exists at a destination, install will warn and skip it — remove it manually after running a backup first.
+The install command creates symlinks from the expected profile locations (e.g. `~/.zshrc`, `~/.config/nvim/`) directly into this repository. Edits to live files therefore land in the git working tree, ready to review with `git diff` and commit. Because the links are absolute, reinstall after moving the repository.
+
+Before anything is changed, install lists the existing files and directories it will replace. It then saves them in a backup, and aborts without changing anything if that backup fails. Destinations that are already linked are left alone, so install is safe to re-run.
 
 ```sh
 ./moar_dots --install
+```
+
+## Status
+
+The status command reports how each live dotfile compares to the repository, listing the files that differ, followed by any changes that have not been committed or pushed. It changes nothing. Run it before rebuilding a machine to confirm that the repository holds everything you want to keep.
+
+```sh
+./moar_dots --status
 ```
 
 ## Restore
@@ -70,7 +100,7 @@ The restore command extracts a previously created backup archive back to its ori
 
 ## Uninstall
 
-The uninstall command removes all symlinks from the user profile that point into the staging directory, then deletes `~/.config/dots/install/`. Only symlinks that were created by moar_dots are touched — anything pointing elsewhere is left intact. Backups in `~/.config/dots/backup/` are never removed. After the cleanup, uninstall offers to run restore interactively so the user's original dotfiles can be returned to their profile in the same operation.
+The uninstall command removes all symlinks from the user profile that point into this repository. Only symlinks that were created by moar_dots are touched — anything pointing elsewhere is left intact. Backups in `~/.config/dots/backup/` are never removed. After the cleanup, uninstall offers to run restore interactively so the user's original dotfiles can be returned to their profile in the same operation.
 
 ```sh
 ./moar_dots --uninstall

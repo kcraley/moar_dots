@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Requirements for setting up dotfiles
 # Centralized variables for the CLI and lib scripts.
-# PROGRAM, COMMAND, LIBRARY_DIR are set by moar_dots.sh before sourcing.
+# PROGRAM, COMMAND, REPO_DIR, LIBRARY_DIR are set by moar_dots before sourcing.
 
 # XDG base directories
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=~/.config}
@@ -16,20 +16,17 @@ export HOME_ENV_DIR=${HOME_ENV_DIR:=~/.env}
 DOTS_CONFIG_DIR="${XDG_CONFIG_HOME}/dots"
 DOTS_BACKUP_DIR="${DOTS_CONFIG_DIR}/backup"
 
-# Staging directory where repo dotfiles are copied before symlinking.
-# Profile symlinks point here, allowing the underlying files to be swapped
-# without touching the repo or the user's profile paths directly.
-DOTS_INSTALL_DIR="${DOTS_CONFIG_DIR}/install"
-
 # Mapping of dotfile sources (repo-relative) to destination path templates.
 # Destinations use ${HOME} or ${XDG_CONFIG_HOME}; expanded at install time.
 # Format: "source:dest_template" per entry.
 DOTFILES=(
 	".ackrc:\${HOME}/.ackrc"
 	".aliasrc:\${HOME}/.aliasrc"
+	".config/eza:\${XDG_CONFIG_HOME}/eza/"
 	".config/ghostty:\${XDG_CONFIG_HOME}/ghostty/"
 	".config/hypr:\${XDG_CONFIG_HOME}/hypr/"
 	".config/nvim:\${XDG_CONFIG_HOME}/nvim/"
+	".config/spaceship.zsh:\${XDG_CONFIG_HOME}/spaceship.zsh"
 	".config/waybar:\${XDG_CONFIG_HOME}/waybar/"
 	".editorconfig:\${HOME}/.editorconfig"
 	".zshrc:\${HOME}/.zshrc"

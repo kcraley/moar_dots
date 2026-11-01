@@ -48,17 +48,15 @@ function restore() {
 
     action "Restoring from backup: $(basename "${backup_file}")"
     prompt "This will overwrite existing dotfiles at their profile locations. Continue? [y|n]: " && read response
-    if [[ ! $response =~ (yes|y|Y) ]]; then
+    if [[ ! $response =~ ^(y|Y|yes)$ ]]; then
         action "Aborting restore..."
         return 0
     fi
 
     # Remove any managed symlinks so the extracted files land as real files.
     for entry in "${DOTFILES[@]}"; do
-        local dest_template="${entry#*:}"
         local dest
-        dest="$(eval echo "$dest_template")"
-        dest="${dest%/}"
+        dest="$(dotfile_dest "${entry}")"
 
         if [[ -L "${dest}" ]]; then
             action "Removing symlink: ${dest}"
@@ -67,8 +65,9 @@ function restore() {
     done
 
     # Extract the backup archive relative to $HOME (archive paths are relative
-    # to $HOME, matching how they were created by --backup).
-    if tar -xzf "${backup_file}" -C "${HOME}"; then
+    # to $HOME, matching how they were created by --backup). --force-local stops
+    # tar treating the colons in a bare backup filename as a remote host.
+    if tar --force-local -xzf "${backup_file}" -C "${HOME}"; then
         ok "Restore complete from: $(basename "${backup_file}")"
     else
         error "Restore failed"
