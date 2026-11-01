@@ -1,0 +1,132 @@
+filekinds:
+  normal:        { foreground: "#F8F8F2" }
+  directory:     { foreground: "#8cdaff" }
+  symlink:       { foreground: "#ff5e5e" }
+  pipe:          { foreground: "#6d6d6d" }
+  block_device:  { foreground: "#ff8942" }
+  char_device:   { foreground: "#ff8942" }
+  socket:        { foreground: "#ff5e5e" }
+  special:       { foreground: "#f92649" }
+  executable:    { foreground: "#e9fdac" }
+  mount_point:   { foreground: "#97d8ea" }
+
+perms:
+  user_read:          { foreground: "#97d8ea" }
+  user_write:         { foreground: "#ff5e5e" }
+  user_execute_file:  { foreground: "#e9fdac" }
+  user_execute_other: { foreground: "#e9fdac" }
+  group_read:         { foreground: "#97d8ea" }
+  group_write:        { foreground: "#ff5e5e" }
+  group_execute:      { foreground: "#e9fdac" }
+  other_read:         { foreground: "#97d8ea" }
+  other_write:        { foreground: "#ff5e5e" }
+  other_execute:      { foreground: "#e9fdac" }
+  special_user_file:  { foreground: "#ff5e5e" }
+  special_other:      { foreground: "#f92649" }
+  attribute:          { foreground: "#3B3A32" }
+
+size:
+  major:        { foreground: "#ff8942" }
+  minor:        { foreground: "#fdb082" }
+  number_byte:  { foreground: "#d0d0d0" }
+  number_kilo:  { foreground: "#97d8ea" }
+  number_mega:  { foreground: "#8cdaff" }
+  number_giga:  { foreground: "#ff8942" }
+  number_huge:  { foreground: "#f92649" }
+  unit_byte:    { foreground: "#d0d0d0" }
+  unit_kilo:    { foreground: "#97d8ea" }
+  unit_mega:    { foreground: "#8cdaff" }
+  unit_giga:    { foreground: "#ff8942" }
+  unit_huge:    { foreground: "#f92649" }
+
+users:
+  user_you:    { foreground: "#fbdfb5" }
+  user_root:   { foreground: "#ff5e5e" }
+  user_other:  { foreground: "#97d8ea" }
+  group_yours: { foreground: "#fbdfb5" }
+  group_root:  { foreground: "#ff5e5e" }
+  group_other: { foreground: "#97d8ea" }
+
+links:
+  normal:          { foreground: "#66a9ec" }
+  multi_link_file: { foreground: "#8cdaff" }
+
+git:
+  new:        { foreground: "#e9fdac" }
+  modified:   { foreground: "#fdb082" }
+  deleted:    { foreground: "#f92649" }
+  renamed:    { foreground: "#8cdaff" }
+  typechange: { foreground: "#97d8ea" }
+  ignored:    { foreground: "#6d6d6d" }
+  conflicted: { foreground: "#ff5e5e" }
+
+file_type:
+  image:      { foreground: "#97d8ea" }
+  video:      { foreground: "#8cdaff" }
+  music:      { foreground: "#E5A5E0" }
+  document:   { foreground: "#d0d0d0" }
+  compressed: { foreground: "#fdb082" }
+  source:     { foreground: "#fbdfb5" }
+
+punctuation: { foreground: "#ffffff" }
+date:        { foreground: "#fdb082" }
+inode:       { foreground: "#6d6d6d" }
+blocks:      { foreground: "#6d6d6d" }
+header:      { foreground: "#F8F8F2" }
+flags:       { foreground: "#fdb082" }
+
+symlink_path:        { foreground: "#66a9ec" }
+control_char:        { foreground: "#ff8942" }
+broken_symlink:      { foreground: "#f92649" }
+broken_path_overlay: { foreground: "#f92649" }
+
+# Nerd Font icon mappings
+filenames:
+  Makefile:        { icon: { glyph: "" } }
+  Dockerfile:     { icon: { glyph: "" } }
+  docker-compose.yml: { icon: { glyph: "" } }
+  Cargo.toml:     { icon: { glyph: "" } }
+  Cargo.lock:     { icon: { glyph: "" } }
+  package.json:   { icon: { glyph: "" } }
+  tsconfig.json:  { icon: { glyph: "" } }
+  .gitignore:     { icon: { glyph: "" } }
+  .env:           { icon: { glyph: "" } }
+  README.md:      { icon: { glyph: "" } }
+
+extensions:
+  lua:   { icon: { glyph: "" } }
+  py:    { icon: { glyph: "" } }
+  rs:    { icon: { glyph: "" } }
+  go:    { icon: { glyph: "" } }
+  js:    { icon: { glyph: "" } }
+  ts:    { icon: { glyph: "" } }
+  jsx:   { icon: { glyph: "" } }
+  tsx:   { icon: { glyph: "" } }
+  java:  { icon: { glyph: "" } }
+  php:   { icon: { glyph: "" } }
+  rb:    { icon: { glyph: "" } }
+  sh:    { icon: { glyph: "" } }
+  zsh:   { icon: { glyph: "" } }
+
+  json:  { icon: { glyph: "" } }
+  yaml:  { icon: { glyph: "" } }
+  yml:   { icon: { glyph: "" } }
+  toml:  { icon: { glyph: "" } }
+
+  md:    { icon: { glyph: "" } }
+  txt:   { icon: { glyph: "" } }
+  pdf:   { icon: { glyph: "" } }
+
+  zip:   { icon: { glyph: "" } }
+  tar:   { icon: { glyph: "" } }
+  gz:    { icon: { glyph: "" } }
+
+  png:   { icon: { glyph: "" } }
+  jpg:   { icon: { glyph: "" } }
+  jpeg:  { icon: { glyph: "" } }
+  svg:   { icon: { glyph: "" } }
+
+  mp3:   { icon: { glyph: "" } }
+  wav:   { icon: { glyph: "" } }
+  mp4:   { icon: { glyph: "" } }
+  mkv:   { icon: { glyph: "" } }

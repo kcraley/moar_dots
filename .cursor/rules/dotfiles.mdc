@@ -12,6 +12,8 @@ This rules contains which tooling and related dotfiles this repository is storin
   * .ackrc
 * Editorconfig
   * .editorconfig
+* Eza
+  * .config/eza/theme.yml
 * Ghostty
   * .config/ghostty/*
 * Hyprland
@@ -23,6 +25,8 @@ This rules contains which tooling and related dotfiles this repository is storin
   * .config/hypr/hyprpaper.conf
 * Neovim
   * .config/nvim/**/*
+* Spaceship
+  * .config/spaceship.zsh
 * Waybar
   * .config/waybar/config.jsonc
   * .config/waybar/style.css
