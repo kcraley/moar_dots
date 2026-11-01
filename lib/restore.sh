@@ -57,8 +57,7 @@ function restore() {
     for entry in "${DOTFILES[@]}"; do
         local dest_template="${entry#*:}"
         local dest
-        dest="$(eval echo "$dest_template")"
-        dest="${dest%/}"
+        dest="$(dotfile_dest "${entry}")"
 
         if [[ -L "${dest}" ]]; then
             action "Removing symlink: ${dest}"
@@ -67,8 +66,9 @@ function restore() {
     done
 
     # Extract the backup archive relative to $HOME (archive paths are relative
-    # to $HOME, matching how they were created by --backup).
-    if tar -xzf "${backup_file}" -C "${HOME}"; then
+    # to $HOME, matching how they were created by --backup). --force-local stops
+    # tar treating the colons in a bare backup filename as a remote host.
+    if tar --force-local -xzf "${backup_file}" -C "${HOME}"; then
         ok "Restore complete from: $(basename "${backup_file}")"
     else
         error "Restore failed"
