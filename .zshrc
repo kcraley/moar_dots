@@ -89,8 +89,8 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Source aliases
-if [ -f "${ZSH_ALIASES:=${HOME}/.aliases}" ]; then
-	source "${ZSH_ALIASES:=${HOME}/.aliases}"
+if [ -f "${ZSH_ALIASES:=${HOME}/.aliasrc}" ]; then
+	source "${ZSH_ALIASES:=${HOME}/.aliasrc}"
 fi
 
 # User configuration
