@@ -53,3 +53,4 @@ shell-integration = zsh
 theme = Dark Modern
 background-opacity = 0.85
 cursor-style = underline
+term = xterm-256color
