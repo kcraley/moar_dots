@@ -8,6 +8,7 @@ Which do you see, 21 or 74? Be care, the devil is in the details!
   * [Usage](#Usage)
   * [Backup](#Backup)
   * [Install](#Install)
+  * [Status](#Status)
   * [Restore](#Restore)
   * [Uninstall](#Uninstall)
   * [Disclaimer](#Disclaimer)
@@ -35,6 +36,7 @@ Options:
 -h  --help           Print this help message
 -i  --install        Install the new configuration of dotfiles
 -r  --restore [path] Restore dotfiles from a backup (interactive if path omitted)
+-s  --status         Show how live dotfiles compare to this repository
 -u  --uninstall      Uninstall an existing version of moar_dots
 ```
 
@@ -56,6 +58,14 @@ Before anything is changed, install lists the existing files and directories it 
 
 ```sh
 ./moar_dots --install
+```
+
+## Status
+
+The status command reports how each live dotfile compares to the repository, listing the files that differ, followed by any changes that have not been committed or pushed. It changes nothing. Run it before rebuilding a machine to confirm that the repository holds everything you want to keep.
+
+```sh
+./moar_dots --status
 ```
 
 ## Restore

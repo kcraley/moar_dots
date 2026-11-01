@@ -28,6 +28,9 @@ case "${COMMAND}" in
     -r|--restore)
         restore "$2"
         ;;
+    -s|--status)
+        status
+        ;;
     -u|--uninstall)
         uninstall
         ;;
