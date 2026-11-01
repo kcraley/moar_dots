@@ -2,9 +2,6 @@
 # This is a collection of utility functions that
 # are resused across moar dots actions.
 
-# Load printers
-source ./printers.sh
-
 function create_dir() {
     if [[ ! -d "$1" ]]; then
 	action "Creating directory: $1"

@@ -17,7 +17,7 @@ Your dot files speak volume and are a general reflection of one's personality. S
 
 ## Usage
 
-Run `./moar_dots` from the repo root with one of the subcommand flags below. Pass `-h` or `--help` to see all available options at any time.
+Run `moar_dots` with one of the subcommand flags below. It can be run from any directory. Pass `-h` or `--help` to see all available options at any time.
 
 ```text
  .::       .::                                .:::::                .::

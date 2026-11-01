@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Requirements for setting up dotfiles
 # Centralized variables for the CLI and lib scripts.
-# PROGRAM, COMMAND, LIBRARY_DIR are set by moar_dots.sh before sourcing.
+# PROGRAM, COMMAND, REPO_DIR, LIBRARY_DIR are set by moar_dots before sourcing.
 
 # XDG base directories
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=~/.config}
