@@ -48,14 +48,13 @@ function restore() {
 
     action "Restoring from backup: $(basename "${backup_file}")"
     prompt "This will overwrite existing dotfiles at their profile locations. Continue? [y|n]: " && read response
-    if [[ ! $response =~ (yes|y|Y) ]]; then
+    if [[ ! $response =~ ^(y|Y|yes)$ ]]; then
         action "Aborting restore..."
         return 0
     fi
 
     # Remove any managed symlinks so the extracted files land as real files.
     for entry in "${DOTFILES[@]}"; do
-        local dest_template="${entry#*:}"
         local dest
         dest="$(dotfile_dest "${entry}")"
 

@@ -8,7 +8,7 @@
 function uninstall() {
     action "We are going to uninstall the dotfiles from moar_dots"
     prompt "Would you like to continue? [y|n]: " && read response
-    if [[ $response =~ (yes|y|Y) ]]; then
+    if [[ $response =~ ^(y|Y|yes)$ ]]; then
         action "Removing dotfiles and custom configuration!"
     else
         action "Aborting uninstallation"
@@ -54,7 +54,7 @@ function uninstall() {
     # in a consistent state rather than with empty profile destinations.
     if [[ -d "${DOTS_BACKUP_DIR}" ]]; then
         prompt "Restore original dotfiles from a backup now? [y|n]: " && read restore_response
-        if [[ $restore_response =~ (yes|y|Y) ]]; then
+        if [[ $restore_response =~ ^(y|Y|yes)$ ]]; then
             restore
         else
             warn "No backup restored. Profile destinations that were symlinked are now absent."

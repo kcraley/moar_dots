@@ -10,7 +10,7 @@ function install() {
 
     action "We are going to install the dotfiles from moar_dots"
     prompt "Would you like to continue? [y|n]: " && read response
-    if [[ $response =~ (yes|y|Y) ]]; then
+    if [[ $response =~ ^(y|Y|yes)$ ]]; then
         action "Let's get started!"
     else
         action "Aborting installation..."
