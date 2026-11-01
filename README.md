@@ -42,7 +42,7 @@ The recommended order of operations for a fresh setup is: **backup → install**
 
 ## Backup
 
-The backup command snapshots the dotfiles currently active in your profile and saves them as a compressed tarball in `~/.config/dots/backup/`. Each archive is named with a timestamp (`YYYYMMDD-HH:MM:SS.tar.gz`) so multiple backups can coexist without overwriting one another. Always run a backup before installing for the first time so that a clean restore point exists if you ever need to revert.
+The backup command snapshots the dotfiles currently active in your profile and saves them as a compressed tarball in `~/.config/dots/backup/`. Each archive is named with a timestamp (`YYYYMMDD-HH:MM:SS.tar.gz`) so multiple backups can coexist without overwriting one another. Archives hold real file contents, so a backup can be taken at any time and still restores correctly after an uninstall.
 
 ```sh
 ./moar_dots --backup
