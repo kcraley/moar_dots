@@ -6,6 +6,7 @@ Which do you see, 21 or 74? Be care, the devil is in the details!
 ## Contents
   * [About](#About)
   * [Usage](#Usage)
+  * [Packages](#Packages)
   * [Backup](#Backup)
   * [Install](#Install)
   * [Status](#Status)
@@ -41,6 +42,23 @@ Options:
 ```
 
 For a fresh setup, run **install**, which backs up anything it replaces. To revert: **uninstall** (which offers an integrated restore step), or run **restore** independently at any time.
+
+## Packages
+
+moar_dots only manages configuration files and does not install software. `packages.txt` lists the Arch repository packages the dotfiles depend on, and `packages-aur.txt` lists those that come from the AUR. Install them on a new system before running install. The AUR command assumes an AUR helper such as `yay`.
+
+```sh
+sudo pacman -S --needed - < packages.txt
+yay -S --needed - < packages-aur.txt
+```
+
+Oh My Zsh and the Spaceship prompt are not packaged, so install them separately. `--keep-zshrc` stops the installer from changing an existing `~/.zshrc`.
+
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+git clone --depth=1 https://github.com/spaceship-prompt/spaceship-prompt.git ~/.oh-my-zsh/custom/themes/spaceship-prompt
+ln -s ~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
+```
 
 ## Backup
 

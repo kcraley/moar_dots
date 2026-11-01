@@ -1,0 +1,4 @@
+ack
+bibata-cursor-theme-bin
+google-chrome
+spotify
